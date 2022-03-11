@@ -1,58 +1,322 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+
+  <div class="usagi">
+    <n-gradient-text class="welcomeText" :size="24" type="success">
+      你好 欢迎来到这里 希望这里的文章对你有所帮助~
+    </n-gradient-text>
+    <div class="head">
+      <div class="wrap">
+        <div class="flush"/>
+        <div class="face"/>
+        <div class="mouth"/>
+        <div class="nose"/>
+      </div>
+    </div>
+  </div>
+  <div class="piske">
+    <div class="head">
+      <div class="eyes"/>
+      <div class="flush"/>
+      <div class="mouth"/>
+    </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
-}
+<script setup>
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.welcomeText{
+  margin: 0 auto;
+
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.usagi {
+  width: 640px;
+  height: 450px;
+  margin: 30px auto 0px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: calc((100vw - 1090px) / 2);
 }
-li {
+
+.usagi .head {
+  width: 640px;
+  height: 565px;
+  background-color: #f8b4c1;
+  border-radius: 477px / 543px;
+  border: 20px #522402 solid;
+  position: absolute;
+  top: 45%;
+  left: calc((100% - 640px) / 2);
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.usagi:hover > .head {
+  top: 80%;
+}
+
+.usagi .head .wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.usagi .head .wrap::before,
+.usagi .head .wrap::after {
+  content: "";
+  width: 80px;
+  height: 160px;
+  background-color: #f8b4c1;
+  border: 20px #522402 solid;
   display: inline-block;
-  margin: 0 10px;
+  border-bottom: none;
+  position: absolute;
+  -webkit-transform-origin: bottom;
+  transform-origin: bottom;
 }
-a {
-  color: #42b983;
+
+.usagi .head .wrap::before {
+  top: -177px;
+  left: 173px;
+  border-radius: 61% 38% 0px 0px;
+  -webkit-transform: rotate(-4deg);
+  transform: rotate(-4deg);
+}
+
+.usagi .head .wrap::after {
+  top: -174px;
+  right: 147px;
+  border-radius: 82% 77% 0px 0px;
+  -webkit-transform: rotate(5.2deg);
+  transform: rotate(5.2deg);
+}
+
+.usagi .face {
+  background-color: #fff;
+  width: 170px;
+  height: 250px;
+  position: absolute;
+  border-radius: 89%;
+  left: calc((100% - 170px) / 2);
+  top: 75px;
+}
+
+.usagi .face::before,
+.usagi .face::after {
+  content: "";
+  width: 45px;
+  height: 25px;
+  display: block;
+  position: absolute;
+  background-color: #522402;
+  border-radius: 57%;
+}
+
+.usagi .face::before {
+  top: 4px;
+  left: -12px;
+  -webkit-transform: rotate(-20deg);
+  transform: rotate(-20deg);
+}
+
+.usagi .face::after {
+  top: 4px;
+  right: -9px;
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);
+}
+
+.usagi .mouth {
+  width: 65px;
+  height: 70px;
+  background-color: #f8b4c1;
+  border: 19px #522402 solid;
+  border-top: none;
+  border-radius: 0% 0% 110% 110%;
+  position: absolute;
+  left: calc((100% - 99px) / 2);
+  top: 160px;
+}
+
+.usagi .mouth::before,
+.usagi .mouth::after {
+  content: "";
+  width: 27px;
+  height: 40px;
+  border: 20px #522402 solid;
+  position: absolute;
+  top: -40px;
+}
+
+.usagi .mouth::before {
+  left: -32px;
+  border-top: none;
+  border-left: none;
+  border-radius: 100px 10px 160px 80px;
+  -webkit-transform: rotate(56deg);
+  transform: rotate(56deg);
+}
+
+.usagi .mouth::after {
+  right: -32px;
+  border-top: none;
+  border-right: none;
+  border-radius: 10px 100px 80px 160px;
+  -webkit-transform: rotate(-56deg);
+  transform: rotate(-56deg);
+}
+
+.usagi .nose {
+  width: 40px;
+  height: 25px;
+  background-color: #522402;
+  position: absolute;
+  left: calc((100% - 40px) / 2);
+  top: 82px;
+  border-radius: 48%;
+}
+
+.usagi .nose::after {
+  content: "";
+  width: 20px;
+  height: 65px;
+  background-color: #522402;
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: calc((100% - 20px) / 2);
+}
+
+.usagi .flush {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.usagi .flush::before,
+.usagi .flush::after {
+  content: "";
+  width: 130px;
+  height: 90px;
+  background-color: #f6a2af;
+  display: block;
+  position: absolute;
+  top: 100px;
+  border-radius: 100%/ 90%;
+}
+
+.usagi .flush::before {
+  left: 70px;
+}
+
+.usagi .flush::after {
+  right: 70px;
+}
+
+.piske {
+  width: 450px;
+  height: 450px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  right: calc((100vw - 1090px) / 2);
+}
+
+.piske .head {
+  width: 100%;
+  height: 575px;
+  background-color: #fff;
+  border-radius: 580px / 550px;
+  border: 15px #40190f solid;
+  position: absolute;
+  top: 40%;
+  left: 0;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+}
+
+.piske:hover > .head {
+  top: 80%;
+}
+
+.piske .mouth {
+  position: absolute;
+  left: calc((100% - 80px) / 2);
+  top: 100px;
+}
+
+.piske .mouth::before,
+.piske .mouth::after {
+  content: "";
+  display: block;
+  border: 15px #40190f solid;
+  background-color: #fedc3a;
+  margin: auto;
+}
+
+.piske .mouth::before {
+  width: 50px;
+  height: 30px;
+  border-radius: 50px;
+}
+
+.piske .mouth::after {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-top: -15px;
+}
+
+.piske .eyes {
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  top: 125px;
+}
+
+.piske .eyes::before,
+.piske .eyes::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: #40190f;
+  position: absolute;
+}
+
+.piske .eyes::before {
+  left: 130px;
+}
+
+.piske .eyes::after {
+  right: 130px;
+}
+
+.piske .flush {
+  width: 100%;
+  position: absolute;
+  height: 60px;
+  top: 140px;
+}
+
+.piske .flush::before,
+.piske .flush::after {
+  content: "";
+  width: 60px;
+  height: 60px;
+  background-color: #f6a2af;
+  display: block;
+  position: absolute;
+  border-radius: 100%/ 90%;
+}
+
+.piske .flush::before {
+  left: 50px;
+}
+
+.piske .flush::after {
+  right: 50px;
 }
 </style>
