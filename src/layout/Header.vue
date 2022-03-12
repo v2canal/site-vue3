@@ -15,12 +15,111 @@ import {
 } from "@vicons/ionicons5";
 import {NIcon} from "naive-ui";
 import {RouterLink} from 'vue-router'
+import {inject} from 'vue'
+import {logOut} from "@/api/user";
+import {useMessage} from "naive-ui";
 
 export default defineComponent({
   setup() {
+
+    const context = inject('context')
+
+    const message = useMessage()
+
+    function handleLogOut() {
+      logOut().then(_ => {
+        message.info(`再见~${context.username}`)
+        context.username=null
+        context.isLogIn=false
+      }).catch(err => {
+        message.error(err)
+      })
+    }
+
+    const menuOptions = [
+      {
+        label: () => h(RouterLink, {
+          to: {
+            path: "/HelloWorld"
+          }
+        }, {default: () => "主页"}),
+        key: "hello-world",
+        icon: renderIcon(EarthIcon)
+      },
+      {
+        label: "程序员友情链接",
+        key: "links",
+        icon: renderIcon(LinkIcon)
+      },
+      {
+        label: () => h(RouterLink, {
+          to: {
+            path: "/board"
+          }
+        }, {default: () => "留言板"}),
+        key: "board",
+        icon: renderIcon(LinkIcon)
+      },
+      {
+        label: () => h(RouterLink, {
+          to: {
+            path: "/profile"
+          }
+        }, {default: () => "个人中心"}),
+        key: "board",
+        icon: renderIcon(LinkIcon)
+      },
+      {
+        label: () => {
+          return context.isLogIn ?//是否登陆？
+              h('a', {
+                href:'#',
+                onclick:handleLogOut
+              }, '退出'):
+              h(RouterLink, {//没有登陆显示登陆按钮
+                to: {
+                  path: "/login"
+                }
+              }, {default: () => "登陆"})
+        },
+        key: "/login",
+        icon: renderIcon(LinkIcon),
+      },
+      {
+        label: '关于本站',
+        key: "self-intro",
+        icon: renderIcon(PersonCircleIcon),
+        children: [
+          {
+            type: "group",
+            label: "其他站点",
+            key: "people",
+          },
+          {
+            label: () => h("a", {
+              href: "#",
+              rel: "noopenner noreferrer"
+            }, "语雀"),
+            key: "yuque",
+            icon: renderIcon(BookIcon),
+          },
+          {
+            label: () => h("a", {
+              href: "https://github.com/v2canal",
+              target: "_blank",
+              rel: "noopenner noreferrer"
+            }, "GitHub"),
+            key: "github",
+            icon: renderIcon(LogoGithub),
+          },
+
+        ]
+      },
+
+    ];
     return {
       inverted: ref(false),
-      menuOptions
+      menuOptions, context
     };
   }
 });
@@ -29,52 +128,6 @@ function renderIcon(icon) {
   return () => h(NIcon, null, {default: () => h(icon)});
 }
 
-const menuOptions = [
-  {
-    label: () => h(RouterLink, {
-      to: {
-        path: "/HelloWorld"
-      }
-    }, {default: () => "主页"}),
-    key: "hello-world",
-    icon: renderIcon(EarthIcon)
-  },
-  {
-    label: "程序员友情链接",
-    key: "links",
-    icon: renderIcon(LinkIcon)
-  },
-  {
-    label: '关于我',
-    key: "self-intro",
-    icon: renderIcon(PersonCircleIcon),
-    children: [
-      {
-        type: "group",
-        label: "其他站点",
-        key: "people",
-      },
-      {
-        label: () => h("a", {
-          href: "https://www.yuque.com/canal",
-          target: "_blank",
-          rel: "noopenner noreferrer"
-        }, "语雀"),
-        key: "yuque",
-        icon: renderIcon(BookIcon),
-      },
-      {
-        label: () => h("a", {
-          href: "https://github.com/v2canal",
-          target: "_blank",
-          rel: "noopenner noreferrer"
-        }, "GitHub"),
-        key: "github",
-        icon: renderIcon(LogoGithub),
-      }
-    ]
-  }
-];
 
 </script>
 <style scoped>

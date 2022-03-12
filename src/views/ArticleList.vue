@@ -7,10 +7,6 @@
         小河今天学习了吗~~~
       </n-gradient-text>
     </template>
-    <template #footer>
-      <n-pagination v-model:page="page" :page-count="100"/>
-    </template>
-
     <n-list-item v-for="article in articleList" :key="article.id">
       <n-button @click="viewArticle(article)" text>
         <template #icon>
@@ -20,19 +16,21 @@
         </template>
         {{ article.title }}
       </n-button>
-
       <span id="time">
         <n-gradient-text :gradient="{from: 'rgb(85, 85, 85)',to: 'rgb(170, 170, 170)'}">
           发布于：{{ article.time }}
         </n-gradient-text>
       </span>
+      <template #footer>
+        <n-pagination v-model:page="page" :page-count="100"/>
+      </template>
     </n-list-item>
   </n-list>
 </template>
 <script>
 import {getArticleListData as fetchData} from "@/api/article";
 import {DocumentTextOutline as DocumentTextIcon} from '@vicons/ionicons5'
-import {reactive} from 'vue'
+import {reactive,ref} from 'vue'
 import moment from 'moment'
 import {router} from '@/router'
 
@@ -53,13 +51,13 @@ export default {
   },
   setup() {
     const parseDate = (timestamp) => {
-      return moment(timestamp).format("YYYY年MM月DD日HH时mm分")
+      return moment(timestamp).format("YYYY年MM月DD日 HH:mm")
     }
     let articleList = reactive([])
-    let _category=''
+    let _category=ref('')
     const getArticleListData = async (category) => {
       const {data} = await fetchData(category)
-      _category=category
+      _category.value=category
       //替换list中的文章列表
       if (data)
         articleList.splice(0, articleList.length, ...data.map(item => {

@@ -1,10 +1,11 @@
 <template>
-  <Layout/>
+  <n-message-provider>
+    <Layout/>
+  </n-message-provider>
 </template>
 
 <script setup>
 import Layout from './layout'
-import { NButton } from 'naive-ui'
 </script>
 
 <style>

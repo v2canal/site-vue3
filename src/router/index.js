@@ -37,6 +37,21 @@ const routes = [
     path: '/network/:id',
     component: () => import("@/components/Article"),
     props: true
+  },
+  {
+    name:'board',
+    path: '/board',
+    component:()=>import('@/views/Board')
+  },
+  {
+    name:'login',
+    path:'/login',
+    component:()=>import('@/components/LogInForm')
+  },
+  {
+    name:'register',
+    path:'/register',
+    component:()=>import('@/components/RegisterForm')
   }
 ]
 export const router = createRouter({

@@ -1,12 +1,13 @@
 import axios from 'axios'
 const baseURL=process.env.VUE_APP_BASE_URL_REMOTE
 const instant=axios.create({
-  baseURL
+  baseURL,
+  withCredentials:true
 })
 
 export const  post=(url,data)=>{
   return new Promise((resolve,reject)=>{
-    instant(url,data)
+    instant.post(url,data)
       .then((response)=>{
         resolve(response)
       })
@@ -18,7 +19,7 @@ export const  post=(url,data)=>{
 
 export const get=(url,data)=>{
   return new Promise((resolve,reject)=>{
-    instant(url,data)
+    instant.get(url,data)
       .then(response=>{
         resolve(response.data)
       })
