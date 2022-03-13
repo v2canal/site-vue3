@@ -21,12 +21,16 @@ import {
   NFormItem,
   NCol,
   NRow,
-  NInput
+  NInput,
+  NCard,
+  NTag,
+  NEmpty
 } from 'naive-ui'
 
 const naive = create({
   components: [NButton, NLayout, NMenu, NLayoutSider, NLayoutHeader, NSwitch, NLayoutFooter, NList, NGradientText,
-    NPagination, NListItem, NIcon, NAvatar, NMessageProvider, NForm, NFormItem, NCol, NRow, NInput]
+    NPagination, NListItem, NIcon, NAvatar, NMessageProvider, NForm, NFormItem, NCol, NRow, NInput,NCard,
+    NTag,NEmpty]
 })
 const app = createApp(App)
 app.use(router)

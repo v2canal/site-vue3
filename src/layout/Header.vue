@@ -11,7 +11,10 @@ import {
   BookOutline as BookIcon, LogoGithub,
   PersonCircleOutline as PersonCircleIcon,
   EarthOutline as EarthIcon,
-  LinkOutline as LinkIcon
+  LinkOutline as LinkIcon,
+  ChatboxEllipsesOutline as ChatboxEllipsesIcon,
+  InformationCircleOutline as InformationCircleIcon,
+  LogIn,LogOut
 } from "@vicons/ionicons5";
 import {NIcon} from "naive-ui";
 import {RouterLink} from 'vue-router'
@@ -47,18 +50,13 @@ export default defineComponent({
         icon: renderIcon(EarthIcon)
       },
       {
-        label: "程序员友情链接",
-        key: "links",
-        icon: renderIcon(LinkIcon)
-      },
-      {
         label: () => h(RouterLink, {
           to: {
             path: "/board"
           }
         }, {default: () => "留言板"}),
         key: "board",
-        icon: renderIcon(LinkIcon)
+        icon: renderIcon(ChatboxEllipsesIcon)
       },
       {
         label: () => h(RouterLink, {
@@ -66,8 +64,8 @@ export default defineComponent({
             path: "/profile"
           }
         }, {default: () => "个人中心"}),
-        key: "board",
-        icon: renderIcon(LinkIcon)
+        key: "profile",
+        icon: renderIcon(InformationCircleIcon)
       },
       {
         label: () => {
@@ -83,7 +81,7 @@ export default defineComponent({
               }, {default: () => "登陆"})
         },
         key: "/login",
-        icon: renderIcon(LinkIcon),
+        icon: context.isLogIn? renderIcon(LogOut): renderIcon(LogIn),
       },
       {
         label: '关于本站',

@@ -28,7 +28,7 @@
 
 <script>
 import {
-  LogoVue,LogoReact
+  LogoVue, LogoReact, LinkOutline as LinkIcon
 } from "@vicons/ionicons5";
 import {LogoJavascript , IosGlobe} from '@vicons/ionicons4'
 import {h, defineComponent, ref} from "vue";
@@ -80,7 +80,12 @@ const menuOptions = [
     },{default:()=>'计算机网络'}),
     key: "network",
     icon: renderIcon(IosGlobe),
-  }
+  },
+  {
+    label: "友情链接",
+    key: "links",
+    icon: renderIcon(LinkIcon)
+  },
 ];
 
 export default defineComponent({

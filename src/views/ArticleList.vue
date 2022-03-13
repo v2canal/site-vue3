@@ -31,7 +31,7 @@
 import {getArticleListData as fetchData} from "@/api/article";
 import {DocumentTextOutline as DocumentTextIcon} from '@vicons/ionicons5'
 import {reactive,ref} from 'vue'
-import moment from 'moment'
+import {parseDate} from "@/utils/moment";
 import {router} from '@/router'
 
 export default {
@@ -50,9 +50,6 @@ export default {
     )
   },
   setup() {
-    const parseDate = (timestamp) => {
-      return moment(timestamp).format("YYYY年MM月DD日 HH:mm")
-    }
     let articleList = reactive([])
     let _category=ref('')
     const getArticleListData = async (category) => {
@@ -82,7 +79,6 @@ export default {
       getArticleListData,
       articleList,
       _category,
-      parseDate,
       viewArticle
     }
   }

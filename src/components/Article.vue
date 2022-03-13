@@ -1,6 +1,7 @@
 <template>
   <div class="article-component">
     <div class="article-content" :innerHTML="article.text_html"/>
+    <div class="article-navbar"></div>
   </div>
 </template>
 <script>
@@ -46,6 +47,8 @@ $DETAIL_THEME_ACTIVE: "#eb4d4b";
     padding: 30px 10px 10px 10px;
     font-size: 16px;
     border-radius: 10px;
+    overflow: auto;
+    white-space: nowrap;
 
     &::after, &::before {
       position: absolute;
@@ -59,7 +62,7 @@ $DETAIL_THEME_ACTIVE: "#eb4d4b";
     &::after {
       content: "";
       left: 8px;
-      background-color: $DETAIL_THEME_ACTIVE;
+      background-color: red;
     }
 
     &::before {

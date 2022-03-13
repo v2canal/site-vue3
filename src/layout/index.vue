@@ -4,12 +4,10 @@
     <Header/>
     <Main/>
     <!--底部-->
-    <!--    <Footer/>-->
   </n-layout>
 </template>
 
 <script setup>
-
 import {router} from '@/router'
 import {provide, reactive} from 'vue'
 import Main from './Main'
@@ -19,9 +17,10 @@ import {verify} from "@/api/user";
 router.beforeEach(async (to, from, next) => {
   verify()
       .then(data => {
-        const {isLogin,username}=data.data
+        const {isLogin,username,userid}=data.data
         context.isLogIn = isLogin
         context.username = username
+        if(context.isLogIn) context.userid=userid
       })
       .catch(err => {
         console.log(err)
@@ -32,6 +31,7 @@ router.beforeEach(async (to, from, next) => {
 const context = reactive({
   isLogIn: false,
   username: null,
+  id:null,
 })
 provide('context', context)
 </script>

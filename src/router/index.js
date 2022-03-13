@@ -52,6 +52,16 @@ const routes = [
     name:'register',
     path:'/register',
     component:()=>import('@/components/RegisterForm')
+  },
+  {
+    name:'profile',
+    path:'/profile',
+    component:()=>import('@/components/Profile'),
+    // beforeEnter: (to, from) => {
+    //   // reject the navigation
+    //   return false
+    // },
+
   }
 ]
 export const router = createRouter({
