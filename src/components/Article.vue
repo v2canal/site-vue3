@@ -48,7 +48,6 @@ $DETAIL_THEME_ACTIVE: "#eb4d4b";
     font-size: 16px;
     border-radius: 10px;
     overflow: auto;
-    white-space: nowrap;
 
     &::after, &::before {
       position: absolute;

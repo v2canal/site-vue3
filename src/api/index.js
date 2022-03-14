@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseURL=process.env.VUE_APP_BASE_URL
+const baseURL=process.env.VUE_APP_BASE_URL_REMOTE
 const instant=axios.create({
   baseURL,
   withCredentials:true

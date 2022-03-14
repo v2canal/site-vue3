@@ -21,7 +21,7 @@
 
     <!--内容主体--路由匹配-->
     <n-layout class="layout-main-router">
-      <router-view></router-view>
+        <router-view></router-view>
     </n-layout>
   </n-layout>
 </template>

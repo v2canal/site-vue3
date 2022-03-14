@@ -24,7 +24,8 @@ import {
   NInput,
   NCard,
   NTag,
-  NEmpty
+  NEmpty,
+  // NSuffix
 } from 'naive-ui'
 
 const naive = create({
@@ -32,6 +33,7 @@ const naive = create({
     NPagination, NListItem, NIcon, NAvatar, NMessageProvider, NForm, NFormItem, NCol, NRow, NInput,NCard,
     NTag,NEmpty]
 })
+// router.getRoutes()
 const app = createApp(App)
 app.use(router)
 app.use(naive)

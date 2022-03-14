@@ -6,6 +6,7 @@
 
 <script setup>
 import Layout from './layout'
+import {onMounted} from "vue";
 </script>
 
 <style>

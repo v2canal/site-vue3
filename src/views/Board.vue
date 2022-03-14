@@ -6,7 +6,7 @@
         发表
       </n-button>
     </template>
-    <n-list-item v-for="commentItem in commentList" :key="commentItem.id">
+    <n-list-item v-for="commentItem in commentList.slice(pageStart,pageEnd)" :key="commentItem.id">
       <template #prefix>
         <n-avatar
             round
@@ -14,7 +14,7 @@
             src="http://codeleilei.gitee.io/blog/default_avatar.jpeg"
         />
       </template>
-      <span class="comment-time">{{commentItem.date}}</span>
+      <span class="comment-time">{{ commentItem.date }}</span>
       <br>
       <span class="comment-content">{{ commentItem.comment }}</span>
       <br>
@@ -23,34 +23,53 @@
       </n-button>
     </n-list-item>
     <template #footer>
-      <n-pagination v-model:page="page" :page-count="100"/>
+      <n-pagination v-model:page="page"
+                    v-model:page-size="pageSize"
+                    :item-count="commentList.length"
+                    :next="handleNext"
+                    :prev="handlePrev"
+      />
     </template>
   </n-list>
 </template>
 
 <script setup>
-import {inject, onMounted, ref,reactive} from 'vue'
+import {inject, onMounted, ref, reactive} from 'vue'
 import {useMessage} from 'naive-ui'
-
-const message = useMessage()
-const context = inject('context')
-const comment = ref('')
-const commentList=reactive([])
 import {publishComment, getCommentList} from "@/api/comment";
 
+const message = useMessage()
+
+const context = inject('context')
+const comment = ref('')
+const commentList = reactive([])
+//分页数据
+const page = ref(1)//当前页码
+const pageSize = ref(7)//当前页面大小
+let pageStart=ref()
+let pageEnd=ref()
+
+function handleNext(e) {
+  pageStart.value=e.startIndex
+  pageEnd.value=e.endIndex
+  return '下一页'
+}
+function handlePrev() {
+  return '上一页'
+}
 //挂载组件时，初始化留言版
 onMounted(() => {
-  getCommentList().then((data)=>{
-    console.log(data.data)
+  getCommentList().then((data) => {
     commentList.push(...data.data)
-  }).catch(err=>{
-    message.error(err)
+  }).catch(err => {
+    message.error('拉取评论失败')
   })
 })
+
 //发表评论
 function handleComment() {
-  publishComment({username: context.username,comment:comment.value}).then(_ => {
-    comment.value=''
+  publishComment({username: context.username, comment: comment.value}).then(_ => {
+    comment.value = ''
     message.success("留言成功!")
   }).catch(_ => {
     message.error('留言失败!')
@@ -66,20 +85,18 @@ function handleComment() {
     .comment-time {
       color: #cccccc;
     }
-    .n-button{
-      color:#556677;
+    .n-button {
+      color: #556677;
     }
-
   }
-
   .board-list-textarea {
     width: 100%;
     background-color: rgba(241, 241, 241, .5);
     outline-color: #40a9ff;
-
     &:hover {
       box-shadow: 0px 0px 10px #40a9ff;
     }
   }
 }
+
 </style>
