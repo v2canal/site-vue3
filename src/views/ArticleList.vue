@@ -7,6 +7,7 @@
         小河今天学习了吗~~~
       </n-gradient-text>
     </template>
+    <!--遍历文章列表-->
     <n-list-item v-for="article in articleList.slice(pageStart,pageEnd)" :key="article.id">
       <n-button @click="viewArticle(article)" text>
         <template #icon>
@@ -22,6 +23,7 @@
         </n-gradient-text>
       </span>
     </n-list-item>
+    <!--底部分页-->
     <template #footer>
       <n-pagination v-model:page="page"
                     :item-count="articleList.length"
@@ -34,45 +36,48 @@
 <script>
 import {getArticleListData as fetchData} from "@/api/article";
 import {DocumentTextOutline as DocumentTextIcon} from '@vicons/ionicons5'
-import {reactive, ref} from 'vue'
+import {onMounted, reactive, ref, watch} from 'vue'
+import {useRouter,useRoute} from 'vue-router'
 import {parseDate} from "@/utils/moment";
-import {router} from '@/router'
 
 export default {
   name: "ArticleList",
   components: {DocumentTextIcon},
-  mounted() {
-  },
-  created() {
-    this.$watch(
-        () => this.$route.path,
-        () => {
-          const {category} = this.$route.query
-          this.getArticleListData(category);
-        },
-        {immediate: true}
-    )
-  },
+  // mounted() {
+  //   console.log(this.$route)
+  // },
   setup() {
+    const router = useRouter()
+    const route=useRoute()
+    onMounted(() => {
+      //监听路由变化，拿到query参数,更新文章列表（注意：并非重新加载ArticleList组件）
+      watch(
+          () => route.path,
+          () => {
+            getArticleListData(route.name);
+          },
+          {immediate: true}
+      )
+    })
     const page = ref(1)//当前页码
     const pageSize = ref(10)//当前页面大小
-    let pageStart=ref()
-    let pageEnd=ref()
+    let pageStart = ref()
+    let pageEnd = ref()
 
     function handleNext(e) {
-      pageStart.value=e.startIndex
-      pageEnd.value=e.endIndex
-      console.log(e)
+      pageStart.value = e.startIndex
+      pageEnd.value = e.endIndex
       return '下一页'
     }
+
     function handlePrev() {
       return '上一页'
     }
+
     let articleList = reactive([])
-    let _category = ref('')
+    //通过query传递的参数更新ArticleList
     const getArticleListData = async (category) => {
       const {data} = await fetchData(category)
-      _category.value = category
       //替换list中的文章列表
       if (data)
         articleList.splice(0, articleList.length, ...data.map(item => {
@@ -83,17 +88,15 @@ export default {
           }
         }))
     }
-    const viewArticle = (e) => {
-      const {id} = e
+    const viewArticle = ({id}) => {
       router.push({
-        name: 'network',
+        name: '_'+route.name,
         params: {id},
       })
     }
     return {
       getArticleListData,
       articleList,
-      _category,
       viewArticle,
       page,
       pageSize,

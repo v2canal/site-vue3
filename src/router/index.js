@@ -1,10 +1,9 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-// import Nprogress from 'nprogress'
 
 const routes = [
   {
     path: '/',
-    redirect: '/HelloWorld'
+    redirect: '/HelloWorld',
   },
   {
     path: '/HelloWorld',
@@ -15,30 +14,50 @@ const routes = [
     component: () => import("@/views/self-intro")
   },
   {
+    name:'javascript',
     path: '/javascript',
     component: () => import("@/views/ArticleList"),
-    query: {
-      type: 'javascript'
-    },
   },
   {
+    name:'_javascript',
+    path: '/javascript/:id',
+    component: () => import("@/components/Article"),
+    props: true
+  },
+  {
+    name: 'vueJs',
     path: '/vueJs',
     component: () => import("@/views/ArticleList")
   },
   {
+    name: '_vueJs',
+    path: '/vueJs/:id',
+    component: () => import("@/components/Article"),
+    props: true
+  },
+  {
+    name: 'reactJs',
     path: '/reactJs',
     component: () => import("@/views/ArticleList")
   },
   {
+    name: '_reactJs',
+    path: '/reactJs/:id',
+    component: () => import("@/components/Article"),
+    props: true
+  },
+  {
+    name: 'network',
     path: '/network',
     component: () => import("@/views/ArticleList"),
   },
   {
-    name: 'network',
+    name: '_network',
     path: '/network/:id',
     component: () => import("@/components/Article"),
     props: true
   },
+
   {
     name: 'board',
     path: '/board',
@@ -58,23 +77,10 @@ const routes = [
     name: 'profile',
     path: '/profile',
     component: () => import('@/components/Profile'),
-    // beforeEnter: (to, from) => {
-    //   // reject the navigation
-    //   return false
-    // },
   }
 ]
 const router = createRouter({
   routes,
   history: createWebHashHistory(),
 })
-// router.beforeEach(()=>{
-//   Nprogress.start()
-//   console.log(Nprogress)
-// })
-// router.afterEach(()=>{
-//   setTimeout(()=>{
-//     Nprogress.done()
-//   },1000)
-// })
 export  {router}

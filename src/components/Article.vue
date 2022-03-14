@@ -1,22 +1,26 @@
 <template>
   <div class="article-component">
+    <div class="article-title">
+      <h1>{{ article.title }}</h1>
+    </div>
     <div class="article-content" :innerHTML="article.text_html"/>
     <div class="article-navbar"></div>
+    <template>
+      <n-back-top :right="50"/>
+    </template>
   </div>
 </template>
 <script>
 import "highlight.js/styles/hybrid.css"
-import {getArticleById} from '@/api/article'
-import {reactive} from 'vue'
+import {getArticleById,} from '@/api/article'
+import {reactive, onMounted} from 'vue'
 
 export default {
   props: ['id'],
-  mounted() {
-  },
-  created() {
-    this.init()
-  },
   setup(props) {
+    onMounted(() => {
+      init()
+    })
     const article = reactive({
       title: '',
       text_html: ''
@@ -39,6 +43,10 @@ export default {
 
 <style lang="scss">
 $DETAIL_THEME_ACTIVE: "#eb4d4b";
+.article-title {
+  text-align: center;
+}
+
 .article-content {
   padding: 20px;
 
@@ -130,10 +138,10 @@ $DETAIL_THEME_ACTIVE: "#eb4d4b";
     border: solid #add9c0;
     border-width: 1px 0px 0px 1px;
 
-    td,th {
+    td, th {
       border: solid #add9c0;
       border-width: 0px 1px 1px 0px;
-      padding:10px 0px;
+      padding: 10px 0px;
     }
   }
 

@@ -44,7 +44,6 @@ const menuOptions = [
     label: ()=>h(RouterLink,{
       to:{
         path:'/javascript',
-        query:{category:'javascript'}
       }
     },{default:()=>'JavaScript'}),
     key: "JavaScript",
@@ -54,7 +53,6 @@ const menuOptions = [
     label: ()=>h(RouterLink,{
       to:{
         path:'/vueJs',
-        query:{category:'vueJs'}
       }
     },{default:()=>'VueJS'}),
     key: "VueJs",
@@ -64,9 +62,6 @@ const menuOptions = [
     label: ()=>h(RouterLink,{
       to:{
         path:'/reactJs',
-        query:{
-          category:'reactJs'
-        }
       }
     },{default:()=>'ReactJS'}),
     key: "ReactJS",
@@ -76,7 +71,6 @@ const menuOptions = [
     label: ()=>h(RouterLink,{
       to:{
         path:'/network',
-        query:{category:'network'},
       },
     },{default:()=>'计算机网络'}),
     key: "network",
