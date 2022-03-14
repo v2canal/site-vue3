@@ -13,8 +13,11 @@ import {provide, reactive} from 'vue'
 import Main from './Main'
 import Header from './Header'
 import {verify} from "@/api/user";
+import { useLoadingBar } from 'naive-ui'
 
+const loadingBar = useLoadingBar()
 router.beforeEach(async (to, from, next) => {
+  loadingBar.start()
   verify()
       .then(data => {
         const {isLogin,username,userid}=data.data
@@ -24,8 +27,12 @@ router.beforeEach(async (to, from, next) => {
       })
       .catch(err => {
         console.log(err)
+        loadingBar.error()
       })
   next()
+})
+router.afterEach(()=>{
+  loadingBar.finish()
 })
 
 const context = reactive({

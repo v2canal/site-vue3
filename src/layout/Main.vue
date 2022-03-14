@@ -23,6 +23,7 @@
     <n-layout class="layout-main-router">
         <router-view></router-view>
     </n-layout>
+
   </n-layout>
 </template>
 
