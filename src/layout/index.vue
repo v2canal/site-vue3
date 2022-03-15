@@ -45,5 +45,6 @@ provide('context', context)
 <style scoped>
 .layout {
   height: inherit;
+  background-color: red;
 }
 </style>

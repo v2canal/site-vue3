@@ -95,13 +95,10 @@ export default defineComponent({
 </script>
 <style  scoped>
 .layout-main {
-
- /*height: calc(100%-43px);*/
- /* width: ;*/
   height: calc(100% - 43px);
 }
 .layout-main-router{
-//height: max-content;
+  /*background-color: #99caf7;*/
 }
 .layout-main-sider {
 }

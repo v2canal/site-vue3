@@ -1,5 +1,4 @@
 <template>
-
   <n-loading-bar-provider>
     <n-message-provider>
       <Layout/>

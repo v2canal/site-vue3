@@ -26,13 +26,14 @@ import {
   NTag,
   NEmpty,
   NLoadingBarProvider,
-  NBackTop
+  NBackTop,
+  NTree
 } from 'naive-ui'
 
 const naive = create({
   components: [NButton, NLayout, NMenu, NLayoutSider, NLayoutHeader, NSwitch, NLayoutFooter, NList, NGradientText,
     NPagination, NListItem, NIcon, NAvatar, NMessageProvider, NForm, NFormItem, NCol, NRow, NInput,NCard,
-    NTag,NEmpty,NLoadingBarProvider,NBackTop]
+    NTag,NEmpty,NLoadingBarProvider,NBackTop,NTree]
 })
 // router.getRoutes()
 const app = createApp(App)

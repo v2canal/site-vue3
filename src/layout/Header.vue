@@ -1,6 +1,6 @@
 <template>
   <n-layout-header class="layout-header" :inverted="inverted" bordered>
-    <n-switch v-model:value="inverted"/>
+<!--    <n-switch v-model:value="inverted"/>-->
     <n-menu class="layout-header-menu" mode="horizontal" :inverted="inverted" :options="menuOptions"/>
   </n-layout-header>
 </template>
@@ -11,7 +11,6 @@ import {
   BookOutline as BookIcon, LogoGithub,
   PersonCircleOutline as PersonCircleIcon,
   EarthOutline as EarthIcon,
-  LinkOutline as LinkIcon,
   ChatboxEllipsesOutline as ChatboxEllipsesIcon,
   InformationCircleOutline as InformationCircleIcon,
   LogIn,LogOut
@@ -24,11 +23,8 @@ import {useMessage} from "naive-ui";
 
 export default defineComponent({
   setup() {
-
     const context = inject('context')
-
     const message = useMessage()
-
     function handleLogOut() {
       logOut().then(_ => {
         message.info(`再见~${context.username}`)
@@ -110,10 +106,8 @@ export default defineComponent({
             key: "github",
             icon: renderIcon(LogoGithub),
           },
-
         ]
       },
-
     ];
     return {
       inverted: ref(false),

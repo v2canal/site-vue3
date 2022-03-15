@@ -1,10 +1,10 @@
 <template>
   <div class="article-component">
+    <NavBar :anchors="anchors"/>
     <div class="article-title">
       <h1>{{ article.title }}</h1>
     </div>
-    <div class="article-content" :innerHTML="article.text_html"/>
-    <div class="article-navbar"></div>
+    <div class="article-content" ref="html_container" :innerHTML="article.text_html"/>
     <template>
       <n-back-top :right="50"/>
     </template>
@@ -13,28 +13,43 @@
 <script>
 import "highlight.js/styles/hybrid.css"
 import {getArticleById,} from '@/api/article'
-import {reactive, onMounted} from 'vue'
-
+import {reactive, ref, onMounted} from 'vue'
+import NavBar from './NavBar'
 export default {
   props: ['id'],
+  components:{
+    NavBar
+  },
   setup(props) {
-    onMounted(() => {
-      init()
+    let html_container = ref(null)
+    let anchors=reactive([])
+    console.log(anchors.length)
+    onMounted( async () => {
+      await init()//获取数据
+      //  处理text_html：h增加跳转锚点，类名
+      const childNodes = html_container.value.childNodes
+      let uuid=0
+      for (let i = 0; i < childNodes.length; i++) {
+        if(childNodes[i].nodeName.startsWith('H')){
+          childNodes[i].setAttribute('id',`head-${childNodes[i].nodeName.substr(1)}-${++uuid}`)
+          anchors.push(childNodes[i])
+        }
+      }
     })
     const article = reactive({
       title: '',
       text_html: ''
     })
-
     async function init() {
-      const {data} = await getArticleById(props.id)
+      const {data}=await getArticleById(props.id)
       article.text_html = data.text_html
       article.title = data.title
     }
 
     return {
-      init,
-      article
+      article,
+      html_container,
+      anchors
     }
   }
 
@@ -49,7 +64,6 @@ $DETAIL_THEME_ACTIVE: "#eb4d4b";
 
 .article-content {
   padding: 20px;
-
   .hljs {
     position: relative;
     padding: 30px 10px 10px 10px;
